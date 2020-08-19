@@ -26,10 +26,15 @@ File jsontxt = new File('/Users/perry.gami/Downloads/config_008.json')
 def result = slurper.parse(jsontxt)
 
 def user = result.tenants[0].tenant_config.users_to_applications[0].devices.count
-
-WebUI.callTestCase(findTestCase('Login case'), [:], FailureHandling.STOP_ON_FAILURE)
-
+for (i=0;i<5;i++)
+{
+def userlist = result.tenants[0].users[i].user_name
+print(userlist)
+WebUI.openBrowser(userlist)
+}
+//WebUI.callTestCase(findTestCase('Login case'), [:], FailureHandling.STOP_ON_FAILURE)
+//
 ////Print(GlobalVariable.Count)
 ////WebUI.verifyMatch(user, GlobalVariable.Count)
-WebUI.verifyMatch(user, GlobalVariable.Count, true, FailureHandling.STOP_ON_FAILURE)
+//WebUI.verifyMatch(user, GlobalVariable.Count, false, FailureHandling.STOP_ON_FAILURE)
 
